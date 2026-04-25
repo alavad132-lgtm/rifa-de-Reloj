@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rifa de Reloj</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    .cell {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .cell:hover {
+      background: #dfefff;
+    }
+    .taken {
+      background: #90ee90;
+    }
+    input {
+      margin-top: 10px;
+      padding: 5px;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Rifa de Reloj ⌚</h1>
+<p>Haz clic en un número y escribe tu nombre</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+  const grid = document.getElementById('grid');
+
+  for (let i = 1; i <= 100; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.innerHTML = `<strong>${i}</strong><br><span></span>`;
+
+    cell.addEventListener('click', () => {
+      if (cell.classList.contains('taken')) return;
+
+      const nombre = prompt('Ingresa tu nombre:');
+      if (nombre) {
+        cell.querySelector('span').textContent = nombre;
+        cell.classList.add('taken');
+      }
+    });
+
+    grid.appendChild(cell);
+  }
+</script>
+
+</body>
+</html>
